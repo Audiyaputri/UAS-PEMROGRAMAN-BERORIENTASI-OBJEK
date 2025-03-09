@@ -1,0 +1,70 @@
+package pajak;
+
+import java.text.DecimalFormat;
+
+/**
+ *
+ * @author nichola, rini, audiya
+ */
+public class Pajak {
+    private String vendor;
+    private String tipe;
+    private double harga;
+    
+    public Pajak(String vendor, String tipe, double harga) {
+        this.vendor = vendor;
+        this.tipe = tipe;
+        this.harga = harga;
+       
+    }
+//    Setter Dan Getter 
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
+    }
+    
+    public String getVendor() {
+        return vendor;    
+    }
+    
+    public void setTipe(String tipe) {
+        this.tipe = tipe;
+    }
+    
+    public String getTipe() {
+        return tipe;
+    }
+    
+    public void setHarga(double harga) {
+        this.harga = harga;
+    }
+    
+    public double getHarga() {
+        return harga;
+        
+    }
+    
+    public double hitungPPN() {
+        if (harga > 4500000) {
+            return 0.05;
+        } else if (harga > 4200000) {
+            return 0.02;
+        } else if (harga > 4000000) {
+            return 0.01;
+        } else {
+            return 0.005;
+        }
+    }
+    
+    public double hargaSetelahPPN() {
+        return harga + (harga * hitungPPN());
+    }
+    
+    public void tampilkanInfo() {
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        System.out.println("Vendor: " + getVendor());
+        System.out.println("Tipe: " + getTipe());
+        System.out.println("Harga Awal: Rp " + df.format(getHarga()));
+        System.out.println("Harga Setelah PPN: Rp: " + df.format(hargaSetelahPPN()));
+    }
+    
+}
